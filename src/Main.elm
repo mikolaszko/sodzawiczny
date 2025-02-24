@@ -7,7 +7,8 @@ module Main exposing (..)
 --
 
 import Browser
-import Html exposing (Html, button, div, text)
+import Html exposing (Html, div, header, p, text)
+import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
 
 
@@ -37,17 +38,17 @@ init =
 
 
 type Msg
-    = Increment
-    | Decrement
+    = Home
+    | Other
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Increment ->
+        Home ->
             model + 1
 
-        Decrement ->
+        Other ->
             model - 1
 
 
@@ -57,8 +58,16 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ button [ onClick Decrement ] [ text "-" ]
-        , div [] [ text (String.fromInt model) ]
-        , button [ onClick Increment ] [ text "+" ]
+    div [ id "main-container" ]
+        [ div [ id "section-container" ]
+            [ div [ id "left-section" ]
+                [ header [ id "home", class "container" ]
+                    [ div [ class "container-content" ]
+                        [ div [ class "title decorating-text" ] [ p [] [ text "Home" ] ]
+                        , p [ id "home-section-paragraph" ] [ text "Hi! I'm ", p [ class "text-orange" ] [ text "Mikołaj Sodzawiczny" ], text "passionate software engineer from Poland" ]
+                        ]
+                    ]
+                ]
+            , div [ id "right-section" ] []
+            ]
         ]

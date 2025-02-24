@@ -7,6 +7,7 @@ module Main exposing (..)
 --
 
 import Browser
+import Data.Content exposing (mainContent)
 import Html exposing (Html, div, header, p, text)
 import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
@@ -24,13 +25,13 @@ main =
 -- MODEL
 
 
-type alias Model =
-    Int
+type alias Model msg =
+    Html msg
 
 
-init : Model
+init : Model msg
 init =
-    0
+    mainContent
 
 
 
@@ -42,21 +43,21 @@ type Msg
     | Other
 
 
-update : Msg -> Model -> Model
-update msg model =
+update : Msg -> Model msg -> Model msg
+update msg _ =
     case msg of
         Home ->
-            model + 1
+            Data.Content.mainContent
 
         Other ->
-            model - 1
+            div [] [ text "Other" ]
 
 
 
 -- VIEW
 
 
-view : Model -> Html Msg
+view : Model Msg -> Html Msg
 view model =
     div [ id "main-container" ]
         [ div [ id "section-container" ]
@@ -68,6 +69,16 @@ view model =
                         ]
                     ]
                 ]
-            , div [ id "right-section" ] []
+            , div [ id "right-section" ]
+                [ div [ id "main-content", class "container h-fill" ]
+                    [ div [ class "container-content" ]
+                        [ div [ class "outer-paragraph-container" ]
+                            [ div [ class "inner-paragraph-container mt-4" ]
+                                [ model
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ]

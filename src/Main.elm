@@ -8,6 +8,7 @@ module Main exposing (..)
 
 import Browser
 import Data.Content exposing (mainContent)
+import Data.CtagsReact exposing (content)
 import Html exposing (Html, div, header, p, text)
 import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
@@ -40,6 +41,7 @@ init =
 
 type Msg
     = Home
+    | Ctags
     | Other
 
 
@@ -48,6 +50,9 @@ update msg _ =
     case msg of
         Home ->
             Data.Content.mainContent
+
+        Ctags ->
+            Data.CtagsReact.content
 
         Other ->
             div [] [ text "Other" ]
@@ -64,8 +69,24 @@ view model =
             [ div [ id "left-section" ]
                 [ header [ id "home", class "container" ]
                     [ div [ class "container-content" ]
-                        [ div [ class "title decorating-text" ] [ p [] [ text "Home" ] ]
+                        [ div [ class "title decorating-text", onClick Home ] [ p [] [ text "Home" ] ]
                         , p [ id "home-section-paragraph" ] [ text "Hi! I'm ", p [ class "text-orange" ] [ text "Mikołaj Sodzawiczny" ], text "passionate software engineer from Poland" ]
+                        ]
+                    ]
+                , div [ id "blog", class "container" ]
+                    [ div [ class "container-content" ]
+                        [ div [ class "title decorating-text" ] [ p [] [ text "Blog Posts" ] ]
+                        , div [ class "ui-list" ]
+                            [ div []
+                                [ div [ onClick Ctags ] [ text "Stubborn Go To Definitions in Nvim (oh god this needs a rework)" ]
+                                ]
+                            , div [] []
+                            , div [] []
+                            , div [] []
+                            , div [] []
+                            , div [] []
+                            , div [] []
+                            ]
                         ]
                     ]
                 ]

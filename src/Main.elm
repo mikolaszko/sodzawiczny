@@ -42,6 +42,7 @@ init =
 type Msg
     = Home
     | Ctags
+    | BareCase
     | Other
 
 
@@ -53,6 +54,9 @@ update msg _ =
 
         Ctags ->
             Data.CtagsReact.content
+
+        BareCase ->
+            div [] [ text "its going to be a banger" ]
 
         Other ->
             div [] [ text "Other" ]
@@ -80,7 +84,9 @@ view model =
                             [ div []
                                 [ div [ onClick Ctags ] [ text "Stubborn Go To Definitions in Nvim (oh god this needs a rework)" ]
                                 ]
-                            , div [] []
+                            , div []
+                                [ div [ onClick BearCase ] [ text "Bear Case" ]
+                                ]
                             , div [] []
                             , div [] []
                             , div [] []

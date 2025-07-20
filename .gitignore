@@ -1,6 +1,2 @@
-elm-stuff
-node_modules
 .git
-package-lock.json
-index.html
-main.js
+/public/
